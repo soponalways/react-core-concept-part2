@@ -4,14 +4,16 @@ export default function Boller () {
     const [remainOver, setRemainOver] = useState(10); 
     const [ball, setBall] = useState(0); 
     const [over, setOver] = useState(0); 
+
     const handleBall = () => {
+        const updateBall = ball + 1; 
+        console.log("before", ball);
         setBall(ball + 1); 
-        // const over2 = Math.floor(ball / 6); 
-        // setOver(over2)
-        if(ball % 6 === 0 && ball >0 ){
+        if(updateBall % 6 === 0 ){
             setOver(over + 1); 
             setRemainOver(remainOver - 1)
         }
+        console.log("after", ball);
     }
     const bollerStyles = {
         border: "2px solid", 

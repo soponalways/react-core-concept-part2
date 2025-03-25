@@ -4,6 +4,7 @@ import Counter from './Counter';
 import Player from "./Player"; 
 import Boller from './Boller';
 import Users from "./Users"; 
+import Friends from './Friends';
 import { Suspense } from 'react';
 
 
@@ -13,6 +14,11 @@ const fetchUsers = async () => {
   return promise;
 }; 
 
+const fetchFriends = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users"); 
+  const promise = await res.json(); 
+  return promise
+}
 function App() {
   const handleClick = (num) => {
     let newNum = num + 10; 
@@ -20,6 +26,7 @@ function App() {
   }; 
 
   const usersPromise = fetchUsers(); 
+  const friendsPromise = fetchFriends(); 
   return (
     <>
       <h1>Vite + React</h1>
@@ -28,6 +35,10 @@ function App() {
         <Users usersPromise={usersPromise}></Users>
       </Suspense>
       
+      <Suspense>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
+
       <Boller></Boller>
       <Player></Player>
       <Player></Player>
