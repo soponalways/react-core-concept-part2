@@ -4,16 +4,30 @@ import Counter from './Counter';
 import Player from "./Player"; 
 import Boller from './Boller';
 import Users from "./Users"; 
+import { Suspense } from 'react';
+
+
+const fetchUsers = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users")
+  const promise = await (res.json());
+  return promise;
+}; 
 
 function App() {
   const handleClick = (num) => {
     let newNum = num + 10; 
     alert(`${newNum}`)
-  }
+  }; 
+
+  const usersPromise = fetchUsers(); 
   return (
     <>
       <h1>Vite + React</h1>
-      <Users></Users>
+      
+      <Suspense fallback={"Data Loading"}>
+        <Users usersPromise={usersPromise}></Users>
+      </Suspense>
+      
       <Boller></Boller>
       <Player></Player>
       <Player></Player>
